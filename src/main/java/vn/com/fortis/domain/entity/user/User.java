@@ -1,0 +1,94 @@
+package vn.com.fortis.domain.entity.user;
+
+import vn.com.fortis.constant.CommonConstant;
+import vn.com.fortis.domain.entity.BaseEntity;
+import vn.com.fortis.domain.entity.address.Address;
+import vn.com.fortis.domain.entity.news.CommentNews;
+import vn.com.fortis.domain.entity.news.News;
+import vn.com.fortis.domain.entity.product.Cart;
+import vn.com.fortis.domain.entity.product.Order;
+import vn.com.fortis.domain.entity.product.Review;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Nationalized;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity(name = "user")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class User extends BaseEntity {
+
+    @Id
+    @GeneratedValue
+    @UuidGenerator
+    @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
+    String id;
+
+    @Column(nullable = false, updatable = false, unique = true)
+    String username;
+
+    @Column(nullable = false)
+    @JsonIgnore
+    String password;
+
+    String firstName;
+
+    String lastName;
+
+    Date dateOfBirth;
+
+    String avatarLink;
+
+    String avatarPublicId;
+
+    @Column(nullable = false)
+    String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    Role role;
+
+    @Enumerated(EnumType.STRING)
+    Gender gender;
+
+    String phone;
+
+    @Builder.Default
+    Boolean isLock = CommonConstant.FALSE;
+
+    @Builder.Default
+    Boolean isActive = CommonConstant.TRUE;
+
+    @Builder.Default
+    Boolean isDeleted = CommonConstant.FALSE;
+
+    @Nationalized
+    String nationality;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Review> reviews;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Order> orders;
+
+    @OneToMany(mappedBy = "author")
+    List<News> authoredNews;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<CommentNews> newsComments;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    Address address;
+}
