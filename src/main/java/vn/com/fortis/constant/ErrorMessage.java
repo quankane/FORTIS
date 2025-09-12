@@ -104,4 +104,11 @@ public class ErrorMessage {
 
         public static final String ERR_TOKEN_TYPE_NOT_VALID = "exception.token.type.not.valid";
     }
+
+    public static class EmailService {
+
+        private EmailService() {}
+
+        public static final String ERR_SEND_EMAIL_FAIL = "exception.send.email.fail";
+    }
 }
