@@ -8,6 +8,7 @@ public class ErrorMessage {
     public static final String UNAUTHORIZED = "exception.unauthorized";
     public static final String FORBIDDEN = "exception.forbidden";
     public static final String FORBIDDEN_UPDATE_DELETE = "exception.forbidden.update-delete";
+    public static final String ACCESS_DENIED_EXCEPTION = "exception.access.denied";
 
     //error validation dto
     public static final String INVALID_SOME_THING_FIELD = "invalid.general";
@@ -94,5 +95,12 @@ public class ErrorMessage {
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_NOT_BLANK = "exception.promotion.discount.percent.must.be.not.blank";
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MIN_VALIDATE = "exception.promotion.discount.percent.must.be.greater.than.or.equal.to.0";
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MAX_VALIDATE = "exception.promotion.discount.percent.must.be.less.than.or.equal.to.110";
+    }
+
+    public static class Token {
+
+        private Token() {}
+
+        public static final String ERR_TOKEN_TYPE_NOT_VALID = "exception.token.type.not.valid";
     }
 }
