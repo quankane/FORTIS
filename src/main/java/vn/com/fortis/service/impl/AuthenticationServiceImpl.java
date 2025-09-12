@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import vn.com.fortis.constant.CommonConstant;
 import vn.com.fortis.constant.ErrorMessage;
@@ -24,6 +26,7 @@ import vn.com.fortis.domain.dto.response.auth.LoginResponseDto;
 import vn.com.fortis.domain.dto.response.auth.RefreshTokenResponseDto;
 import vn.com.fortis.domain.dto.response.user.UserResponseDto;
 import vn.com.fortis.domain.entity.InvalidatedToken;
+import vn.com.fortis.domain.entity.user.Role;
 import vn.com.fortis.domain.entity.user.User;
 import vn.com.fortis.domain.mapper.AuthMapper;
 import vn.com.fortis.exception.InvalidDataException;
@@ -31,6 +34,7 @@ import vn.com.fortis.exception.ResourceNotFoundException;
 import vn.com.fortis.repository.InvalidatedTokenRepository;
 import vn.com.fortis.repository.UserRepository;
 import vn.com.fortis.service.AuthenticationService;
+import vn.com.fortis.service.EmailService;
 import vn.com.fortis.service.JwtService;
 import vn.com.fortis.utils.OtpUtils;
 
@@ -59,6 +63,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     InvalidatedTokenRepository invalidatedTokenRepository;
 
     AuthMapper authMapper;
+
+    EmailService emailService;
 
     Map<String, PendingRegistrationRequestDto> pendingRegisterMap = new ConcurrentHashMap<>();
 
@@ -157,25 +163,91 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         pendingRegisterMap.put(request.getEmail(), pending);
 
+        emailService.sendRegistrationOtpByEmail(request.getEmail(), request.getUsername(), otp);
     }
 
     @Override
     public UserResponseDto verifyOtpToRegister(VerifyOtpRequestDto request) {
-        return null;
+        PendingRegistrationRequestDto pending = pendingRegisterMap.get(request.getEmail());
+
+        if(pending == null) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_PENDING_REQUEST_NULL);
+        }
+        if(pending.isExpired()) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_OTP_EXPIRED);
+        }
+        if(!pending.getOtp().equals(request.getOtp())) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_OTP_NOT_MATCH);
+        }
+
+        RegisterRequestDto req = pending.getRequest();
+
+        User user = authMapper.registerRequestDtoToUser(req);
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+
+        user.setPassword(passwordEncoder.encode(req.getPassword()));
+        user.setRole(Role.USER);
+
+        userRepository.save(user);
+
+        pendingRegisterMap.remove(req.getEmail());
+
+        return authMapper.userToUserResponseDto(user);
     }
 
     @Override
     public void forgotPassword(ForgotPasswordRequestDto request) {
+        if(!userRepository.existsUserByEmail(request.getEmail())) {
+            throw new InvalidDataException(ErrorMessage.User.ERR_EMAIL_NOT_EXISTED);
+        }
 
+        String otp = OtpUtils.generateOtp();
+
+        PendingResetPasswordRequestDto pending = new PendingResetPasswordRequestDto();
+        pending.setRequest(request);
+        pending.setOtp(otp);
+        pending.setExpireAt(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusMinutes(5));
+
+        pendingResetPasswordMap.put(request.getEmail(), pending);
+
+        emailService.sendForgotPasswordOtpByEmail(request.getEmail(), request.getEmail(),  otp);
     }
 
     @Override
     public boolean verifyOtpToResetPassword(VerifyOtpRequestDto request) {
-        return false;
+        PendingResetPasswordRequestDto pending = pendingResetPasswordMap.get(request.getEmail());
+
+        if(pending == null) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_PENDING_REQUEST_NULL);
+        }
+        if(pending.isExpired()) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_OTP_EXPIRED);
+        }
+        if(!pending.getOtp().equals(request.getOtp())) {
+            throw new InvalidDataException(ErrorMessage.Auth.ERR_OTP_NOT_MATCH);
+        }
+
+        pendingResetPasswordMap.remove(request.getEmail());
+
+        return true;
     }
 
     @Override
     public UserResponseDto resetPassword(ResetPasswordRequestDto request) {
-        return null;
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorMessage.User.ERR_USER_NOT_EXISTED));
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPassword()))
+            throw new InvalidDataException(ErrorMessage.User.ERR_DUPLICATE_OLD_PASSWORD);
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+
+        userRepository.save(user);
+
+        return authMapper.userToUserResponseDto(user);
     }
 }
