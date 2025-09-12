@@ -14,7 +14,7 @@ public class ErrorMessage {
     public static final String INVALID_SOME_THING_FIELD = "invalid.general";
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
-    public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String INVALID_BLANK_FIELD = "invalid.blank.field";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
     public static final String INVALID_DATE_FEATURE = "invalid.date-future";
@@ -41,7 +41,7 @@ public class ErrorMessage {
         public static final String ERR_ACCOUNT_LOCKED = "exception.auth.account.locked";
         public static final String INVALID_REFRESH_TOKEN = "exception.auth.invalid.refresh.token";
         public static final String EXPIRED_REFRESH_TOKEN = "exception.auth.expired.refresh.token";
-        public static final String ERR_TOKEN_INVALIDATED = "exception.auth.token.invalidated";
+        public static final String ERR_TOKEN_INVALIDATED = "exception.auth.token.invalid";
         public static final String ERR_MALFORMED_TOKEN = "exception.auth.malformed.token";
         //OTP
         public static final String ERR_PENDING_RESET_REQUEST_NULL = "exception.auth.pending.reset.request.null";
@@ -69,6 +69,7 @@ public class ErrorMessage {
         public static final String ERR_INCORRECT_PASSWORD = "exception.user.incorrect.password";
         public static final String ERR_PERSONAL_INFORMATION_NOT_COMPLETED = "exception.user.personal.information.not.completed";
         public static final String UPLOAD_AVATAR_FAIL = "exception.user.upload.fail";
+        public static final String ERR_DATE_OF_BIRTH_NULL = "exception.date.of.birth.null";
     }
 
     public static class Category {

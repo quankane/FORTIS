@@ -1,0 +1,47 @@
+package vn.com.fortis.domain.dto.request.user;
+
+import vn.com.fortis.domain.entity.user.Gender;
+import vn.com.fortis.domain.validator.GenderSubset;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UpdateUserRequestDto {
+
+    @Schema(description = "User name", example = "username")
+    String username;
+
+    @Schema(description = "First name", example = "Quân")
+    String firstName;
+
+    @Schema(description = "Last name", example = "Bùi")
+    String lastName;
+
+    @Schema(description = "Date of birth", example = "19/05/2005")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    Date dateOfBirth;
+
+    @Schema(description = "Email", example = "example@gmail.com")
+    String email;
+
+    @Schema(description = "Phone number", example = "0123456789")
+    String phone;
+
+    @Schema(description = "Giới tính", example = "MALE / FEMALE / OTHER")
+    @GenderSubset(anyOf = {Gender.MALE, Gender.FEMALE, Gender.OTHER})
+    Gender gender;
+
+    @Schema(description = "Quốc tịch", example = "Việt Nam")
+    String nationality;
+}
