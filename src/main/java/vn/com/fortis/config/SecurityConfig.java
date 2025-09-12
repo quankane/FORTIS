@@ -26,6 +26,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import vn.com.fortis.constant.RoleConstant;
 import vn.com.fortis.security.CustomUserDetailsService;
+import vn.com.fortis.security.CustomizePreFilter;
 
 import java.util.Arrays;
 
@@ -50,6 +51,8 @@ public class SecurityConfig {
     String swaggerEndpoints;
 
     CustomUserDetailsService customUserDetailsService;
+
+    CustomizePreFilter customizePreFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
