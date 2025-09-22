@@ -27,8 +27,8 @@ public class AuthController {
     AuthenticationService authenticationService;
 
     @Operation(
-            summary = "Login account",
-            description = "Used to login account"
+            summary = "Đăng nhập tài khoản",
+            description = "Dùng để đăng nhập tài khoản"
     )
     @PostMapping(UrlConstant.Auth.LOGIN)
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
@@ -39,8 +39,8 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Logout account",
-            description = "Used to logout account"
+            summary = "Đăng xuất tài khoản",
+            description = "Dùng để đăng xuất tài khoản"
     )
     @PostMapping(UrlConstant.Auth.LOGOUT)
     public ResponseEntity<?> logout(@Valid @RequestBody LogoutRequestDto logoutRequestDto) {
@@ -49,8 +49,8 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Refresh token",
-            description = "Used to reissue token"
+            summary = "Làm mới token",
+            description = "Dùng để cấp lại token"
     )
     @PostMapping(UrlConstant.Auth.REFRESH_TOKEN)
     public ResponseEntity<?> refresh(@Valid @RequestBody RefreshTokenRequestDto refreshTokenRequestDto) {
@@ -61,8 +61,8 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Register account",
-            description = "Used to register account"
+            summary = "Đăng kí tài khoản",
+            description = "Dùng để đăng kí tài khoản"
     )
     @PostMapping(UrlConstant.Auth.REGISTER)
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
@@ -71,8 +71,8 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Verify OTP after registration",
-            description = "Used to verify OTP after require registry account"
+            summary = "Xác thực OTP",
+            description = "Dùng để xác thực OTP sau khi yêu cầu đăng kí tài khoản"
     )
     @PostMapping(UrlConstant.Auth.VERIFY_OTP)
     public ResponseEntity<?> verify(@Valid @RequestBody VerifyOtpRequestDto verifyOtpRequestDto) {
@@ -84,8 +84,8 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Forgot password",
-            description = "Used to send email to reset password"
+            summary = "Quên mật khẩu",
+            description = "Dùng để lấy lại mật khẩu"
     )
     @PostMapping(UrlConstant.Auth.FORGOT_PASSWORD)
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequestDto forgotPasswordRequestDto) {
@@ -94,19 +94,20 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Verify OTP after forgot password",
-            description = "Used to verify OTP after require reset password"
+            summary = "Xác thực OTP",
+            description = "Dùng để xác thực OTP sau khi yêu cầu lấy lại mật khẩu"
     )
     @PostMapping(UrlConstant.Auth.VERIFY_OTP_TO_RESET_PASSWORD)
     public ResponseEntity<?> verifyToResetPassword(@Valid @RequestBody VerifyOtpRequestDto request) {
+        boolean isVerified = authenticationService.verifyOtpToResetPassword(request);
         return ResponseUtil.success(
                 HttpStatus.OK,
-                authenticationService.verifyOtpToResetPassword(request) ? SuccessMessage.Auth.VERIFY_OTP_TO_RESET_PASSWORD_SUCCESS : null);
+                SuccessMessage.Auth.VERIFY_OTP_TO_RESET_PASSWORD_SUCCESS);
     }
 
     @Operation(
-            summary = "Reset password",
-            description = "Used to reset password after receive OTP"
+            summary = "Đặt lại mật khẩu",
+            description = "Dùng để đặt lại mật khẩu sau khi đã nhập được OTP"
     )
     @PostMapping(UrlConstant.Auth.RESET_PASSWORD)
     public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequestDto request) {

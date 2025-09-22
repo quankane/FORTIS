@@ -1,5 +1,7 @@
 package vn.com.fortis.service;
 
+import vn.com.fortis.domain.dto.pagination.PaginationRequestDto;
+import vn.com.fortis.domain.dto.pagination.PaginationResponseDto;
 import vn.com.fortis.domain.dto.request.promotion.PromotionRequestDto;
 import vn.com.fortis.domain.dto.response.promotion.PromotionResponseDto;
 
@@ -13,9 +15,10 @@ public interface PromotionService {
 
     PromotionResponseDto getPromotionById(Long id);
 
-    List<PromotionResponseDto> getAllPromotion();
-
     void deletePromotion(Long id);
 
     PromotionResponseDto getPromotionByPromotionCode(String promotionCode);
+
+    PaginationResponseDto<PromotionResponseDto> filterPromotions(PaginationRequestDto paginationRequest, String sortByPrice, String... search);
+
 }
