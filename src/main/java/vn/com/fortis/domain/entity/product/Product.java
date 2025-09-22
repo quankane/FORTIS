@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,9 @@ public class Product extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false, unique = true)
+    String productCode;
+
     @Column(nullable = false)
     String productName;
 
@@ -31,12 +35,15 @@ public class Product extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     String description;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    String detailDescription;
+
     @Column(nullable = false)
     Integer inventoryQuantity;
 
-    List<String> color;
-
-    List<String> imageUrl;
+    @Column()
+    Boolean isDeleted;
 
     @ManyToMany
     @JoinTable(
@@ -44,7 +51,8 @@ public class Product extends BaseEntity {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    List<Category> categories;
+    @Builder.Default
+    List<Category> categories = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     List<Review> reviews;
@@ -55,9 +63,16 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     List<OrderItem> orderItems;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    List<ProductVariation> productVariations;
+
+
     // ---------------- Helper methods ----------------
     //Category
     public void addCategory(Category category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
         if (!categories.contains(category)) {
             categories.add(category);
             category.getProducts().add(this);

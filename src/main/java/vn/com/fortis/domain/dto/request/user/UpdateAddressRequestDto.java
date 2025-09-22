@@ -21,6 +21,6 @@ public class UpdateAddressRequestDto {
     @Schema(description = "Xã/Thôn", example = "Xuân Phương")
     private String commune;
 
-    @Schema(description = "Địa chỉ chi tiết", example = "địa chỉ")
+    @Schema(description = "Địa chỉ chi tiết", example = "Địa chỉ")
     private String detailAddress;
 }

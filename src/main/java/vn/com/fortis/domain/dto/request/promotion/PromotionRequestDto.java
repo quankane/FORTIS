@@ -20,19 +20,19 @@ import java.time.LocalDate;
 public class PromotionRequestDto {
 
     @NotBlank(message = ErrorMessage.Promotion.ERR_PROMOTION_CODE_NOT_BLANK)
-    @Length(min = 6, max = 6, message = ErrorMessage.Promotion.ERR_PROMOTION_CODE_LENGTH)
+    @Size(min = 6, max = 15, message = ErrorMessage.Promotion.ERR_PROMOTION_CODE_LENGTH)
     String promotionCode;
     @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_DESCRIPTION_NOT_NULL)
     String description;
 
-    @NotBlank(message = ErrorMessage.Promotion.ERR_PROMOTION_TYPE_NOT_BLANK)
+    @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_TYPE_NOT_NULL)
     PromotionType type;
 
-    @NotBlank(message = ErrorMessage.Promotion.ERR_PROMOTION_STATUS_NOT_BLANK)
+    @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_STATUS_NOT_NULL)
     PromotionStatus status;
-    @NotEmpty(message = ErrorMessage.Promotion.ERR_PROMOTION_START_DATE_NOT_EMPTY)
+    @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_START_DATE_NOT_NULL)
     LocalDate startDate;
-    @NotEmpty(message = ErrorMessage.Promotion.ERR_PROMOTION_END_DATE_NOT_EMPTY)
+    @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_END_DATE_NOT_NULL)
     LocalDate endDate;
 
     @PositiveOrNull
@@ -40,11 +40,10 @@ public class PromotionRequestDto {
     @PositiveOrNull
     Float maxPriceOrder;
 
-    @NotBlank(message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_NOT_BLANK)
+    @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_NOT_NULL)
     @Min(value = 0, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_MIN_VALIDATE)
     @Max(value = 100, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_MAX_VALIDATE)
     Float discountPercent;
 
     Long categoryId;
 }
-

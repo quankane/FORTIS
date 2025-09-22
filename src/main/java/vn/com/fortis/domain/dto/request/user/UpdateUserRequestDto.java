@@ -32,7 +32,7 @@ public class UpdateUserRequestDto {
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date dateOfBirth;
 
-    @Schema(description = "Email", example = "example@gmail.com")
+    @Schema(description = "Email", example = "quanducbui2017@gmail.com")
     String email;
 
     @Schema(description = "Điện thoại", example = "0123456789")

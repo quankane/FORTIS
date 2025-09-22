@@ -3,26 +3,23 @@ package vn.com.fortis.domain.dto.response.product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductResponseDto {
+public class ProductVariationResponseDto {
 
-    String productCode;
+    Long id;
 
-    String productName;
+    String color;
 
-    String description;
+    String size;
 
-    String detailDescription;
+    Double price;
 
     Integer inventoryQuantity;
 
-    Date updatedAt;
+    MediaResponseDto media;
 
-    Long categoryId;
 }

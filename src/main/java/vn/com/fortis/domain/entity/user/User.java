@@ -18,7 +18,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "user")
+@Entity(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
