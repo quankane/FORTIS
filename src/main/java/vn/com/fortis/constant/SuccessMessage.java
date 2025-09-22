@@ -51,12 +51,19 @@ public class SuccessMessage {
         public static final String GET_ALL_PROMOTION_SUCCESS = "Get all promotion successful";
         public static final String DELETE_PROMOTION_SUCCESS = "Delete promotion successful";
     }
+    public static class Product {
 
-    public static class Email {
+        public static final String GET_PRODUCT_SUCCESS = "Get product successful";
+        public static final String CREATE_PRODUCT_SUCCESS = "Create product successful";
+        public static final String UPDATE_PRODUCT_SUCCESS = "Update product successful";
+        public static final String DELETE_PRODUCT_SUCCESS = "Delete product successful";
+        public static final String GET_ALL_PRODUCTS_SUCCESS = "Get all products successful";
 
-        private Email() {}
-
-        public static final String SEND_REGISTRATION_OTP_SUCCESS = "Send registration otp successful by email";
-        public static final String SEND_FORGOT_PASSWORD_OTP_SUCCESS = "Send forgot password otp successful by email";
+        // Product Variation Messages
+        public static final String GET_PRODUCT_VARIATIONS_SUCCESS = "Get product variations successful";
+        public static final String GET_PRODUCT_VARIATION_SUCCESS = "Get product variation successful";
+        public static final String CREATE_PRODUCT_VARIATION_SUCCESS = "Create product variation successful";
+        public static final String UPDATE_PRODUCT_VARIATION_SUCCESS = "Update product variation successful";
+        public static final String DELETE_PRODUCT_VARIATION_SUCCESS = "Delete product variation successful";
     }
 }

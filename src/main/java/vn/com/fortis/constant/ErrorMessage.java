@@ -2,19 +2,20 @@ package vn.com.fortis.constant;
 
 public class ErrorMessage {
 
-    private ErrorMessage() {}
+    private ErrorMessage() {
+    }
 
     public static final String ERR_EXCEPTION_GENERAL = "exception.general";
     public static final String UNAUTHORIZED = "exception.unauthorized";
     public static final String FORBIDDEN = "exception.forbidden";
     public static final String FORBIDDEN_UPDATE_DELETE = "exception.forbidden.update-delete";
-    public static final String ACCESS_DENIED_EXCEPTION = "exception.access.denied";
 
-    //error validation dto
+    // error validation dto
     public static final String INVALID_SOME_THING_FIELD = "invalid.general";
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
-    public static final String INVALID_BLANK_FIELD = "invalid.blank.field";
+    public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String NOT_NULL_FIELD = "invalid.general.not-null";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
     public static final String INVALID_DATE_FEATURE = "invalid.date-future";
@@ -22,7 +23,8 @@ public class ErrorMessage {
 
     public static class Validator {
 
-        private Validator() {}
+        private Validator() {
+        }
 
         public static final String ERR_INPUT_CONSTRAINT_VALIDATE = "exception.input.value.must.be.greater.than.or.equal.to.0.if.entry.data";
         public static final String ERR_PHONE_VALIDATOR = "exception.phone.not.matches.pattern";
@@ -33,7 +35,8 @@ public class ErrorMessage {
 
     public static class Auth {
 
-        private Auth() {}
+        private Auth() {
+        }
 
         public static final String ERR_INCORRECT_USERNAME = "exception.auth.incorrect.username";
         public static final String ERR_INCORRECT_PASSWORD = "exception.auth.incorrect.password";
@@ -41,17 +44,19 @@ public class ErrorMessage {
         public static final String ERR_ACCOUNT_LOCKED = "exception.auth.account.locked";
         public static final String INVALID_REFRESH_TOKEN = "exception.auth.invalid.refresh.token";
         public static final String EXPIRED_REFRESH_TOKEN = "exception.auth.expired.refresh.token";
-        public static final String ERR_TOKEN_INVALIDATED = "exception.auth.token.invalid";
+        public static final String ERR_TOKEN_INVALIDATED = "exception.auth.token.invalidated";
         public static final String ERR_MALFORMED_TOKEN = "exception.auth.malformed.token";
-        //OTP
-        public static final String ERR_PENDING_REQUEST_NULL = "exception.auth.pending.request.null";
+        // OTP
+        public static final String ERR_PENDING_RESET_REQUEST_NULL = "exception.auth.pending.reset.request.null";
+        public static final String ERR_PENDING_REGISTER_REQUEST_NULL = "exception.auth.pending.register.request.null";
         public static final String ERR_OTP_EXPIRED = "exception.auth.otp.expired";
         public static final String ERR_OTP_NOT_MATCH = "exception.auth.otp.not.match";
     }
 
     public static class User {
 
-        private User() {}
+        private User() {
+        }
 
         public static final String ERR_USER_NOT_EXISTED = "exception.user.user.not.existed";
         public static final String ERR_USERNAME_EXISTED = "exception.user.username.existed";
@@ -69,46 +74,45 @@ public class ErrorMessage {
         public static final String ERR_INCORRECT_PASSWORD = "exception.user.incorrect.password";
         public static final String ERR_PERSONAL_INFORMATION_NOT_COMPLETED = "exception.user.personal.information.not.completed";
         public static final String UPLOAD_AVATAR_FAIL = "exception.user.upload.fail";
-        public static final String ERR_DATE_OF_BIRTH_NULL = "exception.date.of.birth.null";
     }
 
     public static class Category {
 
-        private Category() {}
+        private Category() {
+        }
 
         public static final String ERR_CATEGORY_EXISTED = "exception.category.existed";
         public static final String ERR_CATEGORY_NOT_EXISTED = "exception.category.not.existed";
+        public static final String ERR_CATEGORY_BEING_USED = "exception.category.being.used.cannot.delete.because.include.product";
     }
 
     public static class Promotion {
 
-        private Promotion() {}
+        private Promotion() {
+        }
 
         public static final String ERR_PROMOTION_EXISTED = "exception.promotion.existed";
         public static final String ERR_PROMOTION_NOT_EXISTED = "exception.promotion.not.existed";
         public static final String ERR_PROMOTION_CODE_NOT_BLANK = "exception.promotion.code.not.blank";
         public static final String ERR_PROMOTION_DESCRIPTION_NOT_NULL = "exception.promotion.description.not.null";
-        public static final String ERR_PROMOTION_TYPE_NOT_BLANK = "exception.promotion.type.not.null";
-        public static final String ERR_PROMOTION_STATUS_NOT_BLANK = "exception.promotion.status.not.null";
-        public static final String ERR_PROMOTION_START_DATE_NOT_EMPTY = "exception.promotion.start.date.not.empty";
-        public static final String ERR_PROMOTION_END_DATE_NOT_EMPTY = "exception.promotion.end.date.not.empty";
-        public static final String ERR_PROMOTION_CODE_LENGTH = "exception.promotion.code.length.must.be.exactly.6.digits.long";
-        public static final String ERR_PROMOTION_DISCOUNT_PERCENT_NOT_BLANK = "exception.promotion.discount.percent.must.be.not.blank";
+        public static final String ERR_PROMOTION_TYPE_NOT_NULL = "exception.promotion.type.not.null";
+        public static final String ERR_PROMOTION_STATUS_NOT_NULL = "exception.promotion.status.not.null";
+        public static final String ERR_PROMOTION_START_DATE_NOT_NULL = "exception.promotion.start.date.not.empty";
+        public static final String ERR_PROMOTION_END_DATE_NOT_NULL = "exception.promotion.end.date.not.empty";
+        public static final String ERR_PROMOTION_CODE_LENGTH = "exception.promotion.code.length.must.be.exactly.in.6.to.15";
+        public static final String ERR_PROMOTION_DISCOUNT_PERCENT_NOT_NULL = "exception.promotion.discount.percent.must.be.not.blank";
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MIN_VALIDATE = "exception.promotion.discount.percent.must.be.greater.than.or.equal.to.0";
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MAX_VALIDATE = "exception.promotion.discount.percent.must.be.less.than.or.equal.to.110";
     }
 
-    public static class Token {
-
-        private Token() {}
-
-        public static final String ERR_TOKEN_TYPE_NOT_VALID = "exception.token.type.not.valid";
-    }
-
-    public static class EmailService {
-
-        private EmailService() {}
-
-        public static final String ERR_SEND_EMAIL_FAIL = "exception.send.email.fail";
+    public static class Product {
+        public static final String ERR_PRICE_INVALID = "exception.product.price.invalid";
+        public static final String ERR_QUANTITY_INVALID = "exception.product.quantity.invalid";
+        public static final String ERR_PRODUCT_NOT_EXISTED = "exception.product.not.existed";
+        public static final String ERR_PRODUCT_NAME_EXISTED = "exception.product.name.existed";
+        public static final String ERR_PRODUCT_ALREADY_DELETED = "exception.product.already.deleted";
+        public static final String ERR_PRODUCT_VARIATION_NOT_EXISTED = "exception.product.variation.not.existed";
+        public static final String ERR_PRODUCT_VARIATION_ALREADY_DELETED = "exception.product.variation.already.deleted";
+        public static final String ERR_PRODUCT_INVENTORY_QUANTITY_LESS_THAN_1 = "exception.product.inventory.quantity.less.than.1";
     }
 }
