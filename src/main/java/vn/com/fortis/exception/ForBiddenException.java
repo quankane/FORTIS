@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
+public class ForBiddenException extends RuntimeException {
+    public ForBiddenException(String message) {
         super(message);
     }
 }

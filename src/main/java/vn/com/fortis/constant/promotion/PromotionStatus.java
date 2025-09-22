@@ -10,5 +10,16 @@ public enum PromotionStatus {
     @JsonProperty("inactive")
     INACTIVE,
     @JsonProperty("expired")
-    EXPIRED
+    EXPIRED;
+
+    public static PromotionStatus fromString(String value) {
+        if (value == null) return null;
+        for (PromotionStatus status : PromotionStatus.values()) {
+            if (status.name().equalsIgnoreCase(value)) {
+                return status;
+            }
+        }
+        return null;
+    }
 }
+
