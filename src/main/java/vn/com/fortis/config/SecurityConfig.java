@@ -11,12 +11,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -38,33 +40,39 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${security.public-endpoints")
-    String publicEndpoints;
+    @Value("${security.public-endpoints}")
+    String[] publicEndpoints;
 
-    @Value("${security.user-endpoints")
-    String userEndpoints;
+    @Value("${security.user-endpoints}")
+    String[] userEndpoints;
 
-    @Value("${security.admin-endpoints")
-    String adminEndpoints;
+    @Value("${security.admin-endpoints}")
+    String[] adminEndpoints;
 
-    @Value("${security.swagger-endpoints")
-    String swaggerEndpoints;
+    @Value("${security.swagger-endpoints}")
+    String[] swaggerEndpoints;
 
-    CustomUserDetailsService customUserDetailsService;
+    final CustomUserDetailsService customUserDetailsService;
 
-    CustomizePreFilter customizePreFilter;
+    final CustomizePreFilter customizePreFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry
-                    -> registry.requestMatchers(publicEndpoints).permitAll()
-                        .requestMatchers(userEndpoints).hasAnyAuthority(RoleConstant.USER, RoleConstant.ADMIN)
-                        .requestMatchers(adminEndpoints).hasAuthority(RoleConstant.ADMIN)
-                        .requestMatchers(swaggerEndpoints).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/category").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/promotion").permitAll()
-                        .anyRequest().authenticated())
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
+                        authorizationManagerRequestMatcherRegistry
+                                .requestMatchers(publicEndpoints).permitAll()
+                                .requestMatchers(swaggerEndpoints).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/category").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/category/sub").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/category/search").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/promotion/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product/filter/**").permitAll()
+                                .requestMatchers(userEndpoints).hasAnyAuthority(RoleConstant.USER, RoleConstant.ADMIN)
+                                .requestMatchers(adminEndpoints).hasAnyAuthority(RoleConstant.ADMIN)
+                                .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(customizePreFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
@@ -73,9 +81,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // domain FE
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -89,12 +97,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        return new DaoAuthenticationProvider(customUserDetailsService);
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return customUserDetailsService;
     }
 }

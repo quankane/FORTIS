@@ -5,16 +5,17 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class DotenvInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        //Load env
+        // Load .env
         Dotenv dotenv = Dotenv.configure()
-                .ignoreIfMissing()
+                .ignoreIfMissing()  // không lỗi nếu không có file .env
                 .load();
 
-        // Add all vars to system properties
-        dotenv.entries().forEach(entry
-                -> System.setProperty(entry.getKey(), entry.getValue())
+        // Đưa tất cả biến từ .env vào system properties
+        dotenv.entries().forEach(entry ->
+                System.setProperty(entry.getKey(), entry.getValue())
         );
     }
 }
