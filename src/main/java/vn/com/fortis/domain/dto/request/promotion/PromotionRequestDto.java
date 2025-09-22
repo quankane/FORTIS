@@ -47,3 +47,4 @@ public class PromotionRequestDto {
 
     Long categoryId;
 }
+

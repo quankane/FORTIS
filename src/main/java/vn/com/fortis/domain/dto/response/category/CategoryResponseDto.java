@@ -16,8 +16,7 @@ public class CategoryResponseDto {
     String categoryName;
     String description;
 
-    List<CategoryResponseDto> subCategories;
-
     PromotionResponseDto promotion;
 }
+
 

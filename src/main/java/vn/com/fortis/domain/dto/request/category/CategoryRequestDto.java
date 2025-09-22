@@ -18,3 +18,4 @@ public class CategoryRequestDto {
     @NotNull(message = "Description must be not null")
     String description;
 }
+

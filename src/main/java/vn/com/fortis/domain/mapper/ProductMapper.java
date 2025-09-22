@@ -1,6 +1,7 @@
 package vn.com.fortis.domain.mapper;
 
 //import vn.com.fortis.domain.dto.response.product.ProductResponseDto;
+import vn.com.fortis.domain.dto.response.product.ProductResponseDto;
 import vn.com.fortis.domain.entity.product.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
@@ -12,5 +13,5 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 )
 public interface ProductMapper {
 
-//    ProductResponseDto productToProductResponseDto (Product product);
+    ProductResponseDto productToProductResponseDto (Product product);
 }

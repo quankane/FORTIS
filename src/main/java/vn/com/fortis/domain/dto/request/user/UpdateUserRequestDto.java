@@ -18,16 +18,16 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateUserRequestDto {
 
-    @Schema(description = "User name", example = "username")
+    @Schema(description = "Tên đăng nhập", example = "username")
     String username;
 
-    @Schema(description = "First name", example = "Quân")
+    @Schema(description = "Tên", example = "Quân")
     String firstName;
 
-    @Schema(description = "Last name", example = "Bùi")
+    @Schema(description = "Họ", example = "Bùi")
     String lastName;
 
-    @Schema(description = "Date of birth", example = "19/05/2005")
+    @Schema(description = "Ngày sinh", example = "19/05/2005")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date dateOfBirth;
@@ -35,7 +35,7 @@ public class UpdateUserRequestDto {
     @Schema(description = "Email", example = "example@gmail.com")
     String email;
 
-    @Schema(description = "Phone number", example = "0123456789")
+    @Schema(description = "Điện thoại", example = "0123456789")
     String phone;
 
     @Schema(description = "Giới tính", example = "MALE / FEMALE / OTHER")
@@ -44,4 +44,5 @@ public class UpdateUserRequestDto {
 
     @Schema(description = "Quốc tịch", example = "Việt Nam")
     String nationality;
+
 }
