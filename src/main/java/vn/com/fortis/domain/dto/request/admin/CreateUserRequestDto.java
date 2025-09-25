@@ -1,62 +1,59 @@
 package vn.com.fortis.domain.dto.request.admin;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.springframework.format.annotation.DateTimeFormat;
 import vn.com.fortis.constant.ErrorMessage;
 import vn.com.fortis.constant.UserType;
 import vn.com.fortis.domain.entity.user.Role;
-import vn.com.fortis.domain.validator.Email;
 import vn.com.fortis.domain.validator.EnumValue;
 import vn.com.fortis.domain.validator.PhoneNumber;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserRequestDto {
-    @Schema(description = "User name", example = "quanducbui2017@gmail.com")
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @Schema(description = "Tên đăng nhập", example = "user123")
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String username;
 
-    @Schema(description = "Email", example = "quanducbui2017@gmail.com")
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @Schema(description = "Email người dùng", example = "user@gmail.com")
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     @Email(message = ErrorMessage.INVALID_SOME_THING_FIELD)
     String email;
 
-    @Schema(description = "Password", example = "User123@")
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @Schema(description = "Mật khẩu", example = "User123@")
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=\\S+$).{8,}$", message = ErrorMessage.INVALID_FORMAT_PASSWORD)
     String password;
 
-    @Schema(description = "First name", example = "Quân")
+    @Schema(description = "Họ/Tên đệm", example = "Phạm Văn")
     String firstName;
 
-    @Schema(description = "Last name", example = "Bùi")
+    @Schema(description = "Tên", example = "A")
     String lastName;
 
-    @Schema(description = "Date of birth", example = "19/05/2005")
-    @NotNull(message = ErrorMessage.User.ERR_DATE_OF_BIRTH_NULL)
+    @Schema(description = "Ngày sinh", example = "2000-01-01")
+    @NotNull(message = "dateOfBirth must be not null")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date dateOfBirth;
 
-    @Schema(description = "Phone number", example = "0123456789")
+    @Schema(description = "Số điện thoại", example = "0123456789")
     @PhoneNumber()
     String phone;
 
-    @Schema(description = "National", example = "Việt Nam")
+    @Schema(description = "Quốc tịch", example = "Việt Nam")
     String nationality;
 
-    @Schema(description = "Role", example = "USER")
+    @Schema(description = "Vai trò", example = "USER")
     @EnumValue(name = "type", enumClass = UserType.class)
     Role role;
 }

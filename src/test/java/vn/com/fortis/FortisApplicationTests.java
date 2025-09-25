@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import vn.com.fortis.config.DotenvInitializer;
 
 @SpringBootTest
-//@ContextConfiguration(initializers = DotenvInitializer.class)
+@ContextConfiguration(initializers = DotenvInitializer.class)
 class FortisApplicationTests {
 
 	@Test

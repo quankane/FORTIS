@@ -15,6 +15,7 @@ public class ErrorMessage {
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
     public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String INVALID_BLANK_FIELD = "invalid.general.not-blank";
     public static final String NOT_NULL_FIELD = "invalid.general.not-null";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
@@ -26,7 +27,7 @@ public class ErrorMessage {
         private Validator() {
         }
 
-        public static final String ERR_INPUT_CONSTRAINT_VALIDATE = "exception.input.value.must.be.greater.than.or.equal.to.0.if.entry.data";
+        public static final String ERR_INPUT_CONSTRAINT_VALIDATE = "exception.input.value.must.be.greater.than.or.equal.to.0.if.entry.data.AND.min.less.than.max.price";
         public static final String ERR_PHONE_VALIDATOR = "exception.phone.not.matches.pattern";
         public static final String ERR_GENDER_VALIDATOR = "exception.gender.must.be.not.any.of.array.['male', 'female', 'other']";
         public static final String ERR_ENUM_VALUE_VALIDATOR = "exception.{name}.must.be.not.any.of.enum.{enumClass}";
@@ -101,8 +102,9 @@ public class ErrorMessage {
         public static final String ERR_PROMOTION_END_DATE_NOT_NULL = "exception.promotion.end.date.not.empty";
         public static final String ERR_PROMOTION_CODE_LENGTH = "exception.promotion.code.length.must.be.exactly.in.6.to.15";
         public static final String ERR_PROMOTION_DISCOUNT_PERCENT_NOT_NULL = "exception.promotion.discount.percent.must.be.not.blank";
-        public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MIN_VALIDATE = "exception.promotion.discount.percent.must.be.greater.than.or.equal.to.0";
-        public static final String ERR_PROMOTION_DISCOUNT_PERCENT_MAX_VALIDATE = "exception.promotion.discount.percent.must.be.less.than.or.equal.to.110";
+        public static final String ERR_PROMOTION_DISCOUNT_PERCENT_INVALID = "exception.promotion.discount.percent.must.be.in.1..100";
+        public static final String ERR_PROMOTION_EXPIRED = "exception.promotion.expired";
+        public static final String ERR_PROMOTION_INACTIVE = "exception.promotion.expired";
     }
 
     public static class Product {

@@ -1,33 +1,32 @@
 package vn.com.fortis.domain.dto.request.admin;
 
+import vn.com.fortis.domain.entity.user.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import vn.com.fortis.domain.entity.user.Role;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateUserRequestDto {
-    @Schema(description = "Username", example = "username")
+    @Schema(description = "Tên đăng nhập", example = "username")
     String username;
 
-    @Schema(description = "Password", example = "User123@")
+    @Schema(description = "Mật khẩu", example = "password")
     String password;
 
-    @Schema(description = "First name", example = "Quân")
+    @Schema(description = "Tên", example = "Quân")
     String firstName;
 
-    @Schema(description = "Last name", example = "Bùi")
+    @Schema(description = "Họ", example = "Bùi")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     String lastName;
 
-    @Schema(description = "Date of birth", example = "19/05/2005")
+    @Schema(description = "Ngày sinh", example = "19/05/2005")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date dateOfBirth;
@@ -36,12 +35,11 @@ public class UpdateUserRequestDto {
     String email;
 
 
-    @Schema(description = "National", example = "Việt nam")
+    @Schema(description = "Quốc tịch", example = "Việt nam")
     String nationality;
 
-    @Schema(description = "Role", example = "USER")
+    @Schema(description = "Vai trò", example = "USER")
     Role role;
 
-    @Schema(description = "Is active", example = "true")
     Boolean isActive;
 }

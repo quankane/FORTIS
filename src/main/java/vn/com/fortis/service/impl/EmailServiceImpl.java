@@ -1,7 +1,5 @@
 package vn.com.fortis.service.impl;
 
-import vn.com.fortis.constant.ErrorMessage;
-import vn.com.fortis.exception.SendEmailFailException;
 import vn.com.fortis.service.EmailService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -49,9 +48,9 @@ public class EmailServiceImpl implements EmailService {
     public void sendRegistrationOtpByEmail(String to, String name, String otp) {
         log.info("Send email verification for username = {}", name);
 
-        Email fromEmail = new Email(from, "FORTIS");
+        Email fromEmail = new Email(from, "HAUS");
         Email toEmail = new Email(to);
-        String subject = "VERIFY ACCOUNT";
+        String subject = "Xác thực tài khoản";
 
 
         //Tạo Dynamic Template data
@@ -88,7 +87,6 @@ public class EmailServiceImpl implements EmailService {
             }
         } catch (Exception ex) {
             log.info("Sending email verification failed, message = {}", ex);
-            throw new SendEmailFailException(ErrorMessage.EmailService.ERR_SEND_EMAIL_FAIL);
         }
     }
 
@@ -98,7 +96,7 @@ public class EmailServiceImpl implements EmailService {
 
         Email fromEmail = new Email(from, "HAUS");
         Email toEmail = new Email(to);
-        String subject = "FORGOT PASSWORD";
+        String subject = "Quên mật khẩu";
 
 
         //Tạo Dynamic Template data
@@ -135,7 +133,6 @@ public class EmailServiceImpl implements EmailService {
             }
         } catch (Exception ex) {
             log.info("Sending email forgot password failed, message = {}", ex);
-            throw new SendEmailFailException(ErrorMessage.EmailService.ERR_SEND_EMAIL_FAIL);
         }
     }
 }

@@ -15,7 +15,7 @@ import vn.com.fortis.exception.ResourceNotFoundException;
 import vn.com.fortis.repository.ProductRepository;
 import vn.com.fortis.repository.ProductVariationRepository;
 import vn.com.fortis.service.ProductVariationService;
-import vn.com.fortis.util.UploadFileUtil;
+import vn.com.fortis.utils.UploadFileUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

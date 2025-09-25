@@ -3,11 +3,13 @@ package vn.com.fortis.domain.dto.request.promotion;
 import vn.com.fortis.constant.ErrorMessage;
 import vn.com.fortis.constant.promotion.PromotionStatus;
 import vn.com.fortis.constant.promotion.PromotionType;
+import vn.com.fortis.domain.entity.product.Promotion;
 import vn.com.fortis.domain.validator.PositiveOrNull;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
+import vn.com.fortis.domain.validator.ValidPromotionDates;
 
 import java.time.LocalDate;
 
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ValidPromotionDates
 public class PromotionRequestDto {
 
     @NotBlank(message = ErrorMessage.Promotion.ERR_PROMOTION_CODE_NOT_BLANK)
@@ -41,8 +44,8 @@ public class PromotionRequestDto {
     Float maxPriceOrder;
 
     @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_NOT_NULL)
-    @Min(value = 0, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_MIN_VALIDATE)
-    @Max(value = 100, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_MAX_VALIDATE)
+    @Min(value = 0, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_INVALID)
+    @Max(value = 100, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_INVALID)
     Float discountPercent;
 
     Long categoryId;

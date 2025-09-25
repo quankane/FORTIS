@@ -2,7 +2,6 @@ package vn.com.fortis.domain.dto.response.auth;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.constant.CommonConstant;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,9 +11,11 @@ import vn.com.fortis.constant.CommonConstant;
 @Builder
 public class LoginResponseDto {
 
-    String tokenType = CommonConstant.BEARER_TOKEN;
+    String tokenType;
 
     String userId;
+
+    String role;
 
     String accessToken;
 

@@ -20,7 +20,7 @@ import vn.com.fortis.repository.ProductRepository;
 import vn.com.fortis.repository.criteria.SearchCriteria;
 import vn.com.fortis.repository.criteria.SearchQueryCriteriaConsumer;
 import vn.com.fortis.service.ProductService;
-import vn.com.fortis.util.ProductCodeUtil;
+import vn.com.fortis.utils.ProductCodeUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;

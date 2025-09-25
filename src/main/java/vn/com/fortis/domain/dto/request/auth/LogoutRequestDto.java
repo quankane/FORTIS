@@ -12,7 +12,7 @@ import vn.com.fortis.constant.ErrorMessage;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LogoutRequestDto {
 
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String token;
 
 }

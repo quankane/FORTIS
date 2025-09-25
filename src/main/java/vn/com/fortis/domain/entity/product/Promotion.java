@@ -29,15 +29,15 @@ public class Promotion extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    PromotionType type; //Order, Category
+    PromotionType type;
 
     @Column(name = "description", nullable = false)
     String description;
 
-    @Column(name = "min_price_order", nullable = false)
+    @Column(name = "min_price_order")
     Float minPriceOrder;
 
-    @Column(name = "max_price_order", nullable = false)
+    @Column(name = "max_price_order")
     Float maxPriceOrder;
 
     @Column(name = "start_date")
@@ -46,18 +46,23 @@ public class Promotion extends BaseEntity {
     @Column(name = "end_date")
     LocalDate endDate;
 
-    @Column(name = "discount_percent")
+    @Column(name = "discount_percent", nullable = false)
     Float discountPercent;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     PromotionStatus status;
 
+    @Column(name = "is_deleted")
+    @Builder.Default
+    Boolean isDeleted = false;
+
     @OneToMany(mappedBy = "promotion")
     List<Order> orders;
 
-    @OneToMany(mappedBy = "promotion")
-    List<Category> categories;
+    @OneToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 
     // ---------------- Helper methods ----------------
@@ -77,18 +82,4 @@ public class Promotion extends BaseEntity {
         }
     }
 
-    // CategoryPromotion
-    public void addCategory(Category category) {
-        if (!categories.contains(category)) {
-            categories.add(category);
-            category.setPromotion(this);
-        }
-    }
-
-    public void removeCategory(Category category) {
-        if (categories.contains(category)) {
-            categories.remove(category);
-            category.setPromotion(null);
-        }
-    }
 }

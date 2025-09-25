@@ -27,11 +27,11 @@ public class RegisterRequestDto {
     String password;
 
     @Schema(description = "Họ/Tên đệm", example = "Phạm Văn")
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String firstName;
 
     @Schema(description = "Tên", example = "A")
-    @NotBlank(message = ErrorMessage.INVALID_BLANK_FIELD)
+    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String lastName;
 
     @Schema(description = "Email người dùng", example = "user@gmail.com")
