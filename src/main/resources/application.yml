@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Haus
+    name: Fortis
   profiles:
     active: @spring.profiles.active@
 

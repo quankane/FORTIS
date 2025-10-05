@@ -16,7 +16,7 @@ import vn.com.fortis.repository.UserRepository;
 
 @Log4j2
 @RequiredArgsConstructor
-@SpringBootApplication(scanBasePackages = "com.example.haus")
+@SpringBootApplication(scanBasePackages = "vn.com.fortis")
 @EnableConfigurationProperties({AdminInfoProperties.class})
 public class FortisApplication {
 

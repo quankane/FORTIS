@@ -1,5 +1,9 @@
 package vn.com.fortis.service.impl;
 
+import vn.com.fortis.constant.TokenType;
+import vn.com.fortis.exception.InvalidDataException;
+import vn.com.fortis.repository.InvalidatedTokenRepository;
+import vn.com.fortis.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,19 +17,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
-import vn.com.fortis.constant.TokenType;
-import vn.com.fortis.exception.InvalidDataException;
-import vn.com.fortis.repository.InvalidatedTokenRepository;
-import vn.com.fortis.service.JwtService;
 
 import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 
 @Service
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j(topic = "JWT-SERVICE")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class JwtServiceImpl implements JwtService {
     @Value("${jwt.expiryHour}")
     long expiryHour;
