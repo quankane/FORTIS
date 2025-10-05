@@ -15,12 +15,13 @@ public class ErrorMessage {
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
     public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
-    public static final String INVALID_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String NOT_EMPTY_FIELD = "invalid.general.not-empty";
     public static final String NOT_NULL_FIELD = "invalid.general.not-null";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
     public static final String INVALID_DATE_FEATURE = "invalid.date-future";
     public static final String INVALID_DATETIME = "invalid.datetime-format";
+    public static final String MUST_BE_POSITIVE = "invalid.general.must.positive";
 
     public static class Validator {
 
@@ -108,6 +109,9 @@ public class ErrorMessage {
     }
 
     public static class Product {
+
+        private Product() {}
+
         public static final String ERR_PRICE_INVALID = "exception.product.price.invalid";
         public static final String ERR_QUANTITY_INVALID = "exception.product.quantity.invalid";
         public static final String ERR_PRODUCT_NOT_EXISTED = "exception.product.not.existed";
@@ -117,4 +121,26 @@ public class ErrorMessage {
         public static final String ERR_PRODUCT_VARIATION_ALREADY_DELETED = "exception.product.variation.already.deleted";
         public static final String ERR_PRODUCT_INVENTORY_QUANTITY_LESS_THAN_1 = "exception.product.inventory.quantity.less.than.1";
     }
+
+    public static class Order {
+
+
+        private Order() {}
+
+        public static final String ERR_PAYMENT_NOT_FOUND = "exception.order.not.found";
+        public static final String ERR_ORDER_NOT_EXISTED = "exception.order.not.existed";
+        public static final String ERR_PAYMENT_TYPE_INVALID = "exception.order.payment.type.invalid";
+        public static final String ERR_PAYMENT_EXPIRED = "exception.order.payment.expired";
+        public static final String ERR_PAYMENT_STATUS_INVALID = "exception.order.payment.status.invalid";
+    }
+
+    public static class Payment {
+
+        private Payment() {}
+
+        public static final String CALLBACK_VNPAY_FAIL = "exception.vnpay.callback.verification.failed";
+
+
+    }
+
 }

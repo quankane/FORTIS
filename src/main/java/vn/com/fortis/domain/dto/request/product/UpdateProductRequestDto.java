@@ -2,9 +2,11 @@ package vn.com.fortis.domain.dto.request.product;
 
 import vn.com.fortis.constant.ErrorMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +15,14 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateProductRequestDto {
 
-    @Schema(description = "Tên sản phẩm cần cập nhật", example = "Ghế sofa phòng khách cao cấp")
+    @Schema(description = "Tên sản phẩm", example = "Ghế sofa phòng khách")
     String productName;
 
+    @Schema(description = "Giá", example = "199.99")
+    @Positive(message = ErrorMessage.MUST_BE_POSITIVE)
+    Double price;
+
     @Schema(description = "Mô tả sản phẩm", example = "Ghế sofa cao cấp, chất liệu da thật, thiết kế hiện đại")
-    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String description;
 
     @Schema(description = "Mô tả chi tiết sản phẩm",
@@ -33,10 +38,11 @@ public class UpdateProductRequestDto {
                     Chiều cao tay vịn: 63 cm
                     """
     )
-    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String detailDescription;
 
-    @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
-    String category;
+    @Schema(description = "Tên các thể loại", example = "[\"Phòng ngủ\", \"Phòng khách\"]")
+    List<String> categories;
 
+    @Schema(description = "Danh sách ID của các hình ảnh cần xóa", example = "[1, 2, 3]")
+    List<Long> imageIdsToDelete;
 }

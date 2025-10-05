@@ -8,20 +8,31 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Boolean existsByProductNameAndIsDeletedFalse(String name);
+    @Query("SELECT DISTINCT p FROM Product p " +
+            "LEFT JOIN FETCH p.categories c " +
+            "LEFT JOIN FETCH p.medias m " +
+            "LEFT JOIN FETCH p.productVariations pv " +
+            "WHERE p.id = :id AND p.isDeleted = false " +
+            "AND (pv IS NULL OR pv.isDeleted = false)")
+    Product findByIdWithActiveVariations(@Param("id") Long id);
 
-    Boolean existsByProductNameAndIsDeletedTrue(String name);
+    Boolean existsByProductNameAndIsDeletedFalse(String name);
 
     Boolean existsByProductCode(String productCode);
 
-    @Query("SELECT DISTINCT p FROM Product p " +
-            "JOIN p.categories c " +
-            "WHERE c.categoryName = :categoryName " +
-            "AND (p.isDeleted IS NULL OR p.isDeleted = false)")
-    Page<Product> findProductsByCategoryName(@Param("categoryName") String categoryName, Pageable pageable);
+    @Query("SELECT p FROM Product p WHERE (p.isDeleted IS NULL OR p.isDeleted = false)")
+    Page<Product> findAllActiveProducts(Pageable pageable);
+
+//    @Query("SELECT DISTINCT p FROM Product p " +
+//            "JOIN p.categories c " +
+//            "WHERE c.categoryName = :categoryName " +
+//            "AND (p.isDeleted IS NULL OR p.isDeleted = false)")
+//    Page<Product> findProductsByCategoryName(@Param("categoryName") String categoryName, Pageable pageable);
 
     @Query("SELECT DISTINCT p FROM Product p " +
             "JOIN p.categories c " +
@@ -29,11 +40,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "AND (p.isDeleted IS NULL OR p.isDeleted = false)")
     Page<Product> findProductsByCategoryId(@Param("categoryId") Long categoryId, Pageable pageable);
 
-    @Query("SELECT p FROM Product p " +
-            "WHERE (LOWER(CAST(p.description AS string)) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(CAST(p.detailDescription AS string)) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
-            "AND (p.isDeleted IS NULL OR p.isDeleted = false)")
-    Page<Product> searchProductsByKeyword(@Param("keyword") String keyword, Pageable pageable);
+//    @Query("SELECT p FROM Product p " +
+//            "WHERE (LOWER(CAST(p.description AS string)) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+//            "OR LOWER(CAST(p.detailDescription AS string)) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+//            "OR LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+//            "AND (p.isDeleted IS NULL OR p.isDeleted = false)")
+//    Page<Product> searchProductsByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 }

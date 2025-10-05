@@ -1,13 +1,13 @@
 package vn.com.fortis.domain.mapper;
 
+import vn.com.fortis.domain.entity.product.ProductVariation;
+import vn.com.fortis.domain.dto.request.product.CreateProductVariationRequestDto;
+import vn.com.fortis.domain.dto.request.product.UpdateProductVariationRequestDto;
+import vn.com.fortis.domain.dto.response.product.ProductVariationResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import vn.com.fortis.domain.dto.request.product.CreateProductVariationRequestDto;
-import vn.com.fortis.domain.dto.request.product.UpdateProductVariationRequestDto;
-import vn.com.fortis.domain.dto.response.product.ProductVariationResponseDto;
-import vn.com.fortis.domain.entity.product.ProductVariation;
 
 import java.util.List;
 
