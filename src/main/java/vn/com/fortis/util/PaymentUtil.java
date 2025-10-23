@@ -1,4 +1,4 @@
-package vn.com.fortis.utils;
+package vn.com.fortis.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @RequiredArgsConstructor
-public class PaymentUtils {
+public class PaymentUtil {
 
     @Value("${spring.profiles.active}")
     static String activeProfile;
@@ -116,7 +116,7 @@ public class PaymentUtils {
             }
         }
 
-        return PaymentUtils.hmacSHA512(hashSecret, hashData.toString());
+        return PaymentUtil.hmacSHA512(hashSecret, hashData.toString());
     }
 
     public static String createOrderRawSignature(

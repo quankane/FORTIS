@@ -1,4 +1,4 @@
-package vn.com.fortis.utils;
+package vn.com.fortis.util;
 
 import vn.com.fortis.domain.dto.pagination.PaginationCustom;
 import vn.com.fortis.domain.dto.pagination.PaginationRequestDto;

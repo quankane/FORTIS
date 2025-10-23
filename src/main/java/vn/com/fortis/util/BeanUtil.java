@@ -1,4 +1,4 @@
-package vn.com.fortis.utils;
+package vn.com.fortis.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;

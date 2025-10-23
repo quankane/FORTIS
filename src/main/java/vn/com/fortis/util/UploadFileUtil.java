@@ -1,4 +1,4 @@
-package vn.com.fortis.utils;
+package vn.com.fortis.util;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
