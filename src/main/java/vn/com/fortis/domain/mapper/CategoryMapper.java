@@ -1,9 +1,9 @@
 package vn.com.fortis.domain.mapper;
 
-import org.mapstruct.*;
 import vn.com.fortis.domain.dto.request.category.CategoryRequestDto;
 import vn.com.fortis.domain.dto.response.category.CategoryResponseDto;
 import vn.com.fortis.domain.entity.product.Category;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
@@ -19,4 +19,3 @@ public interface CategoryMapper {
     @Mapping(target = "parentId", source = "parentCategory.id")
     CategoryResponseDto categoryToCategoryResponseDto(Category category);
 }
-

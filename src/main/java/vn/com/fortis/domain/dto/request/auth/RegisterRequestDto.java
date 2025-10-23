@@ -1,12 +1,12 @@
 package vn.com.fortis.domain.dto.request.auth;
 
+import vn.com.fortis.constant.ErrorMessage;
+import vn.com.fortis.domain.validator.Email;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.constant.ErrorMessage;
-import vn.com.fortis.domain.validator.Email;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +15,7 @@ import vn.com.fortis.domain.validator.Email;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegisterRequestDto {
 
-    @Schema(description = "username", example = "user123")
+    @Schema(description = "Tên tài khoản", example = "user123")
     @NotBlank(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     String username;
 

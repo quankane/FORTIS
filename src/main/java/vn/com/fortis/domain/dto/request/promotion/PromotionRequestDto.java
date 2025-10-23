@@ -3,13 +3,11 @@ package vn.com.fortis.domain.dto.request.promotion;
 import vn.com.fortis.constant.ErrorMessage;
 import vn.com.fortis.constant.promotion.PromotionStatus;
 import vn.com.fortis.constant.promotion.PromotionType;
-import vn.com.fortis.domain.entity.product.Promotion;
 import vn.com.fortis.domain.validator.PositiveOrNull;
+import vn.com.fortis.domain.validator.ValidPromotionDates;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.validator.constraints.Length;
-import vn.com.fortis.domain.validator.ValidPromotionDates;
 
 import java.time.LocalDate;
 
@@ -39,9 +37,9 @@ public class PromotionRequestDto {
     LocalDate endDate;
 
     @PositiveOrNull
-    Float minPriceOrder;
+    Long minPriceOrder;
     @PositiveOrNull
-    Float maxPriceOrder;
+    Long maxPriceOrder;
 
     @NotNull(message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_NOT_NULL)
     @Min(value = 0, message = ErrorMessage.Promotion.ERR_PROMOTION_DISCOUNT_PERCENT_INVALID)

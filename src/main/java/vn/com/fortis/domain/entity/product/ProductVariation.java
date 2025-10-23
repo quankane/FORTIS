@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
-@Table(name = "product-variations")
+@Table(name = "product_variations")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -32,6 +34,9 @@ public class ProductVariation extends BaseEntity {
     @Column(nullable = false)
     Integer inventoryQuantity;
 
+    @Column(nullable = false)
+    @Builder.Default
+    Integer soldQuantity = 0;
 
     @Column()
     Boolean isDeleted;
@@ -43,4 +48,10 @@ public class ProductVariation extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "productVariation", fetch = FetchType.LAZY)
     @JsonIgnore
     Media media;
+
+    @OneToMany(mappedBy = "productVariation", cascade = CascadeType.ALL)
+    List<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "productVariation", cascade = CascadeType.ALL)
+    List<CartItem> cartItems;
 }

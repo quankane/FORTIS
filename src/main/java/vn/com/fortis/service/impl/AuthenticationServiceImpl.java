@@ -38,6 +38,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import vn.com.fortis.utils.OtpUtils;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -66,6 +67,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     InvalidatedTokenRepository invalidatedTokenRepository;
 
     UserRepository userRepository;
+
+    PasswordEncoder passwordEncoder;
 
     Map<String, PendingRegistrationRequestDto> pendingRegisterMap = new ConcurrentHashMap<>();
 

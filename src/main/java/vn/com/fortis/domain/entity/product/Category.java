@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "categories")
 @NoArgsConstructor
@@ -39,8 +40,6 @@ public class Category extends BaseEntity {
     @Builder.Default
     List<Product> products = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "category")
     Promotion promotion;
 }
-

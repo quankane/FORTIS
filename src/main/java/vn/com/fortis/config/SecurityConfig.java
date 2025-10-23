@@ -1,6 +1,5 @@
 package vn.com.fortis.config;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import vn.com.fortis.constant.RoleConstant;
 import vn.com.fortis.security.CustomUserDetailsService;
 import vn.com.fortis.security.CustomizePreFilter;
@@ -23,6 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -60,29 +60,43 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                        authorizationManagerRequestMatcherRegistry
+                .authorizeHttpRequests(
+                        authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                                 .requestMatchers(publicEndpoints).permitAll()
                                 .requestMatchers(swaggerEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/category").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/category/sub").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/promotion").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product/category/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product/category-id/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/product/search").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/product/filter").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/category/search").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/promotion/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/product/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/product/filter/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/payment/momo/callback").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/payment/momo/ipn-handler").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/order/**").permitAll()
                                 .requestMatchers(userEndpoints).hasAnyAuthority(RoleConstant.USER, RoleConstant.ADMIN)
                                 .requestMatchers(adminEndpoints).hasAnyAuthority(RoleConstant.ADMIN)
                                 .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider()).addFilterBefore(customizePreFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(customizePreFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // domain FE
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:5173",
+                "https://ahistorical-undelusory-soren.ngrok-free.dev",
+                "https://sandbox.vnpayment.vn",
+                "https://test-payment.momo.vn")); // domain FE + ngrok + VNPay + MoMo
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
 
@@ -97,7 +111,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 

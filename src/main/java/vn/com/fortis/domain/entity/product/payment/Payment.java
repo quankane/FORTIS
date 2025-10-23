@@ -5,9 +5,9 @@ import vn.com.fortis.domain.entity.product.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "payments")
@@ -19,21 +19,29 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment extends BaseEntity {
 
-  @Id
-  @GeneratedValue
-  @UuidGenerator
-  @Column(name = "id", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
-  String id;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
+    String id;
 
-  LocalDate paymente;
+    Double amount;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id", nullable = false)
-  Order order;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gateway", length = 20)
+    PaymentGateway gateway;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "payment_method_id", nullable = false)
-  PaymentMethod paymentMethod;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", length = 20)
+    PaymentType type;
 
+    @Enumerated(EnumType.STRING)
+    PaymentStatus status;
+
+    Date expireAt;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
 
 }

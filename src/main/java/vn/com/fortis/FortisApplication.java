@@ -16,7 +16,7 @@ import vn.com.fortis.repository.UserRepository;
 
 @Log4j2
 @RequiredArgsConstructor
-@SpringBootApplication(scanBasePackages = "com.example.haus")
+@SpringBootApplication(scanBasePackages = "vn.com.fortis")
 @EnableConfigurationProperties({AdminInfoProperties.class})
 public class FortisApplication {
 
@@ -50,7 +50,7 @@ public class FortisApplication {
 						.role(Role.ADMIN)
 						.build();
 				userRepository.save(admin);
-				log.info("admin created successful with name: {}", admin.getUsername());
+				log.info("admin created successful with name: {} and password = {}", admin.getUsername(), adminInfo.getPassword());
 			}
 		};
 	}

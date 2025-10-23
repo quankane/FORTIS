@@ -3,6 +3,8 @@ package vn.com.fortis.domain.dto.response.product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,6 +21,16 @@ public class ProductVariationResponseDto {
     Double price;
 
     Integer inventoryQuantity;
+
+    Integer soldQuantity;
+
+    Float discountPercent;
+
+    Long daysRemaining;
+
+    Date createdAt;
+
+    Date updatedAt;
 
     MediaResponseDto media;
 

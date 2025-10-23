@@ -106,7 +106,7 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/fortis?
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/fortis
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
     restart: unless-stopped

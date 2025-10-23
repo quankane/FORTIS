@@ -57,6 +57,21 @@ public class UrlConstant {
         public static final String SEARCH_CATEGORY_BY_NAME_AND_SORT_BY_KEYWORD = PRE_FIX + "/search";
     }
 
+    public static class Cart {
+
+        private Cart() {
+        }
+
+        private static final String PRE_FIX = "/cart";
+
+        public static final String ADD_CART = PRE_FIX ;
+        public static final String UPDATE_CART = PRE_FIX;
+        public static final String DELETE_CART = PRE_FIX;
+        public static final String GET_CART_BY_USER_ID = PRE_FIX;
+        public static final String GET_ALL_CART= PRE_FIX + "/list";
+        public static final String REMOVE_CART_ITEM_FROM_CART= PRE_FIX + "/{variantId}";
+    }
+
     public static class Promotion {
 
         private Promotion() {
@@ -98,4 +113,43 @@ public class UrlConstant {
         }
     }
 
+    public static class Payment {
+        private static final String PRE_FIX = "/payment";
+
+        public static final String GET_PAYMENT_URL = PRE_FIX + "/vnpay/payment_url";
+        public static final String VNPAY_RETURN = PRE_FIX + "/vnpay/vnpay-return";
+        public static final String VNPAY_IPN = PRE_FIX + "/vnpay/vnpay-ipn";
+
+        public static final String MOMO_CREATE_ORDER = PRE_FIX + "/momo/create";
+        public static final String MOMO_IPN = PRE_FIX + "/momo/ipn-handler";
+        public static final String MOMO_CALLBACK = PRE_FIX + "/momo/callback";
+
+        public static final String COD_PAYMENT = PRE_FIX + "/cod";
+
+        private Payment() {
+        }
+    }
+
+
+    public static class Order {
+        private static final String PRE_FIX = "/order";
+
+        public static final String GET_ALL_ORDERS = PRE_FIX;
+        public static final String GET_ORDER_BY_ID = PRE_FIX + "/{id}";
+        public static final String UPDATE_STATUS_ORDER_BY_ID = PRE_FIX + "/{id}";
+
+        private Order() {
+
+        }
+    }
+
+    public static class Address {
+        private static final String PRE_FIX = "/address";
+
+        public static final String ADD_ADDRESS = PRE_FIX;
+        public static final String UPDATE_ADDRESS = PRE_FIX + "/{id}";
+        public static final String DELETE_ADDRESS = PRE_FIX + "/{id}";
+        public static final String GET_ADDRESSES_BY_USER_ID = PRE_FIX + "/user";
+        public static final String GET_ADDRESS = PRE_FIX + "/{id}";
+    }
 }

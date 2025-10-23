@@ -3,7 +3,9 @@ package vn.com.fortis.domain.dto.response.product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,9 +14,13 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductResponseDto {
 
+    Long id;
+
     String productCode;
 
     String productName;
+
+    Double price;
 
     String description;
 
@@ -22,7 +28,21 @@ public class ProductResponseDto {
 
     Integer inventoryQuantity;
 
+    Integer soldQuantity;
+
+    Float discountPercent;
+
+    Long daysRemaining;
+
+    Date createdAt;
+
     Date updatedAt;
 
-    Long categoryId;
+    Boolean isDeleted;
+
+    List<MediaResponseDto> medias;
+
+    List<String> categoriesName = new ArrayList<>();
+
+    List<ProductVariationResponseDto> productVariations = new ArrayList<>();
 }

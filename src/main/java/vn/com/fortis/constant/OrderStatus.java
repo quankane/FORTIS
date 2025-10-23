@@ -12,10 +12,10 @@ public enum OrderStatus {
     CONFIRMED,
     @JsonProperty("processing")
     PROCESSING,
-    @JsonProperty("shipped")
-    SHIPPED,
-    @JsonProperty("out for delivery")
-    OUT_FOR_DELIVERY,
+    @JsonProperty("completed")
+    COMPLETED,
+    @JsonProperty("failed")
+    FAIL,
     @JsonProperty("delivered")
     DELIVERED,
     @JsonProperty("cancelled")

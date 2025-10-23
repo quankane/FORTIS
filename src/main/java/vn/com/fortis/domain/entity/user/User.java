@@ -12,13 +12,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Nationalized;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "users")
+@Entity(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,9 +28,9 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36) DEFAULT (UUID())")
     String id;
 
     @Column(nullable = false, updatable = false, unique = true)
@@ -89,6 +89,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<CommentNews> newsComments;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    Address address;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Address> addresses;
 }

@@ -2,22 +2,30 @@ package vn.com.fortis.domain.dto.request.product;
 
 import vn.com.fortis.constant.ErrorMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateProductRequestDto {
+public class ProductRequestDto {
 
     @Schema(description = "Tên sản phẩm", example = "Ghế sofa phòng khách")
     @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String productName;
+
+    @Schema(description = "Giá", example = "199.99")
+    @NotNull(message = ErrorMessage.NOT_BLANK_FIELD)
+    @Positive(message = ErrorMessage.MUST_BE_POSITIVE)
+    Double price;
 
     @Schema(description = "Mô tả sản phẩm", example = "Ghế sofa cao cấp, chất liệu da thật, thiết kế hiện đại")
     @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
@@ -39,17 +47,8 @@ public class CreateProductRequestDto {
     @NotBlank(message = ErrorMessage.NOT_BLANK_FIELD)
     String detailDescription;
 
-    @NotNull(message = ErrorMessage.NOT_NULL_FIELD)
-    @Min(value = 0, message = ErrorMessage.Product.ERR_PRICE_INVALID)
-    Double price;
-
-    @NotNull(message = ErrorMessage.NOT_NULL_FIELD)
-    @Schema(description = "Category Id", example = "1")
-    Long categoryId;
-
-    @NotNull(message = ErrorMessage.NOT_NULL_FIELD)
-    @Schema(description = "Inventory quantity", example = "500")
-            @Min(value = 1, message = ErrorMessage.Product.ERR_PRODUCT_INVENTORY_QUANTITY_LESS_THAN_1)
-    Integer inventoryQuantity;
+    @Schema(description = "Tên các thể loại", example = "[\"Phòng ngủ\", \"Phòng khách\"]")
+    @NotEmpty(message = ErrorMessage.NOT_EMPTY_FIELD)
+    List<String> categories;
 
 }

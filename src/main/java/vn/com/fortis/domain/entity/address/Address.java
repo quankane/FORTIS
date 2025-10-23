@@ -1,14 +1,12 @@
 package vn.com.fortis.domain.entity.address;
 
+import vn.com.fortis.constant.CommonConstant;
 import vn.com.fortis.domain.entity.BaseEntity;
 import vn.com.fortis.domain.entity.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
+import lombok.*;
 
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +16,9 @@ import org.hibernate.annotations.UuidGenerator;
 public class Address extends BaseEntity {
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
-    String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
+    Long id;
 
     @Column(name = "country")
     private String country;
@@ -35,10 +32,14 @@ public class Address extends BaseEntity {
     @Column(name = "commune")
     private String commune;
 
-    @Column(name = "detail-address")
+    @Column(name = "detail_address")
     private String detailAddress;
 
-    @OneToOne
+    @Builder.Default
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = CommonConstant.FALSE;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }
