@@ -20,31 +20,31 @@ public class VNPAYConfig {
     //VNPAY_ORDER_TYPE=other
     //VNPAY_CURRCODE=VND
     //VNPAY_LOCALE=vn
-    @Value("${VNPAY_URL}")
+    @Value("${payment.vnpayUrl}")
     private String vnp_Url;
 
-    @Value("${VNPAY_RETURN_URL}")
+    @Value("${payment.vnpayReturnUrl}")
     private String vnp_ReturnUrl;
 
-    @Value("${VNPAY_TMN_CODE}")
+    @Value("${payment.vnpayTmnCode}")
     private String vnp_TmnCode;
 
-    @Value("${VNPAY_HASH_SECRET}")
+    @Value("${payment.vnpayHashSecret}")
     private String vnp_HashSecret;
 
-    @Value("${VNPAY_VERSION}")
+    @Value("${payment.vnpVersion}")
     private String vnp_Version;
 
-    @Value("${VNPAY_COMMAND}")
+    @Value("${payment.vnpayCommand}")
     private String vnp_Command;
 
-    @Value("${VNPAY_ORDER_TYPE}")
+    @Value("${payment.vnpayOrderType}")
     private String vnp_OrderType;
 
-    @Value("${VNPAY_CURRCODE}")
+    @Value("${payment.vnpayCurrCode}")
     private String vnp_CurrCode;
 
-    @Value("${VNPAY_LOCALE}")
+    @Value("${payment.vnpayLocale}")
     private String vnp_Locale;
 
     public Map<String, String> getConfig() {

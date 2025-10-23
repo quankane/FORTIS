@@ -50,7 +50,7 @@ public class FortisApplication {
 						.role(Role.ADMIN)
 						.build();
 				userRepository.save(admin);
-				log.info("admin created successful with name: {}", admin.getUsername());
+				log.info("admin created successful with name: {} and password = {}", admin.getUsername(), adminInfo.getPassword());
 			}
 		};
 	}

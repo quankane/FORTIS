@@ -21,7 +21,7 @@ public class OpenApiConfig {
     public GroupedOpenApi groupedOpenApi(@Value("${openapi.service.api-docs}") String apiDocs) {
         return GroupedOpenApi.builder()
                 .group(apiDocs)
-                .packagesToScan("com.example.haus.controller")
+                .packagesToScan("vn.com.fortis.controller")
                 .build();
     }
 

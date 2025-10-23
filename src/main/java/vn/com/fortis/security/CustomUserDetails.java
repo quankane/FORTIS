@@ -1,28 +1,23 @@
 package vn.com.fortis.security;
 
-import lombok.AccessLevel;
+import vn.com.fortis.domain.entity.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import vn.com.fortis.domain.entity.user.User;
 
 import java.util.Collection;
 import java.util.List;
 
-/**
- *
- */
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Getter
 @Setter
 public class CustomUserDetails implements UserDetails {
 
-    User user;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -41,17 +36,17 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.getIsDeleted();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return user.getIsLock();
+        return !user.getIsLock();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return user.getIsActive();
+        return true;
     }
 
     @Override

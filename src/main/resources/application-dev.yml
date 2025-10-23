@@ -13,8 +13,6 @@ spring:
   config:
     activate:
       on-profile: dev
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE}
 
   #DATABASE
   datasource:
@@ -78,3 +76,15 @@ cloudinary:
   api_key: ${CLOUDINARY_API_KEY:671838345639772
   secret_key: ${CLOUDINARY_SECRET_KEY:-xdwjAMbATWoIvkpbT_-6K5TuIg}
 
+#VNPAY
+payment:
+  vnpayUrl: ${VNPAY_URL}
+  vnpayReturnUrl: ${VNPAY_RETURN_URL}
+  vnpayTmnCode: ${VNPAY_TMN_CODE}
+  vnpayHashSecret: ${VNPAY_HASH_SECRET}
+  vnpVersion: ${VNPAY_VERSION}
+  vnpayCommand: ${VNPAY_COMMAND}
+  vnpayMaxTime: ${VNPAY_MAXTIME}
+  vnpayOrderType: ${VNPAY_ORDER_TYPE}
+  vnpayCurrCode: ${VNPAY_CURRCODE}
+  vnpayLocale: ${VNPAY_LOCALE}

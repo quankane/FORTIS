@@ -5,9 +5,10 @@ import vn.com.fortis.domain.entity.product.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "payments")
@@ -20,20 +21,26 @@ import java.time.LocalDate;
 public class Payment extends BaseEntity {
 
   @Id
-  @GeneratedValue
-  @UuidGenerator
+  @GeneratedValue(generator = "uuid2")
+  @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
   @Column(name = "id", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
   String id;
 
-  LocalDate paymente;
+  Long amount;
+
+  @Enumerated(EnumType.STRING)
+  PaymentGateway gateway;
+
+  @Enumerated(EnumType.STRING)
+  PaymentType type;
+
+  @Enumerated(EnumType.STRING)
+  PaymentStatus status;
+
+  Date expireAt;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "order_id", nullable = false)
   Order order;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "payment_method_id", nullable = false)
-  PaymentMethod paymentMethod;
-
 
 }
