@@ -7,7 +7,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,27 +19,29 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment extends BaseEntity {
 
-  @Id
-  @GeneratedValue(generator = "uuid2")
-  @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-  @Column(name = "id", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
-  String id;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
+    String id;
 
-  Long amount;
+    Double amount;
 
-  @Enumerated(EnumType.STRING)
-  PaymentGateway gateway;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gateway", length = 20)
+    PaymentGateway gateway;
 
-  @Enumerated(EnumType.STRING)
-  PaymentType type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", length = 20)
+    PaymentType type;
 
-  @Enumerated(EnumType.STRING)
-  PaymentStatus status;
+    @Enumerated(EnumType.STRING)
+    PaymentStatus status;
 
-  Date expireAt;
+    Date expireAt;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id", nullable = false)
-  Order order;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
 
 }
