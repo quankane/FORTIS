@@ -1,6 +1,5 @@
 package vn.com.fortis.domain.dto.response.product;
 
-import jakarta.persistence.Column;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -28,6 +27,14 @@ public class ProductResponseDto {
     String detailDescription;
 
     Integer inventoryQuantity;
+
+    Integer soldQuantity;
+
+    Float discountPercent;
+
+    Long daysRemaining;
+
+    Date createdAt;
 
     Date updatedAt;
 
