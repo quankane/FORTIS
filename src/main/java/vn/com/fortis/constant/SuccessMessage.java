@@ -30,6 +30,17 @@ public class SuccessMessage {
         public static final String UPDATE_AVATAR_SUCCESS = "Update avatar user successful";
     }
 
+    public static class Address {
+
+        private Address() {}
+
+        public static final String ADD_ADDRESS_SUCCESS = "Add address successful";
+        public static final String UPDATE_ADDRESS_SUCCESS = "Update address successful";
+        public static final String GET_ADDRESS_SUCCESS = "Get address successful";
+        public static final String GET_ALL_ADDRESS_SUCCESS = "Get all address successful";
+        public static final String DELETE_ADDRESS_SUCCESS = "Delete address successful";
+    }
+
     public static class Category {
 
         private Category() {}
@@ -39,6 +50,17 @@ public class SuccessMessage {
         public static final String GET_CATEGORY_SUCCESS = "Get category successful";
         public static final String GET_ALL_CATEGORY_SUCCESS = "Get all category successful";
         public static final String DELETE_CATEGORY_SUCCESS = "Delete category successful";
+    }
+
+    public static class Cart {
+
+        private Cart() {}
+
+        public static final String ADD_CART_SUCCESS = "Add cart successful";
+        public static final String UPDATE_CART_SUCCESS = "Update cart successful";
+        public static final String GET_CART_SUCCESS = "Get cart successful";
+        public static final String DELETE_CART_SUCCESS = "Delete cart successful";
+        public static final String DELETE_CART_ITEM_FROM_CART = "Delete cart item from cart successful";
     }
 
     public static class Promotion {
@@ -74,11 +96,25 @@ public class SuccessMessage {
         private Payment() {}
 
         public static final String GET_VNPAYURL_SUCCESS = "Get VNPay url request successful";
-        public static final String CALLBACK_VNPAY_SUCCESS = "VNPay callback verification successful";
+        public static final String IPN_RECEIVED_SUCCESS = "VNPay IPN received and processed successfully";
+        public static final String CALLBACK_VNPAY_SUCCESS = "VNPay return callback processed successfully";
+
+        public static final String CREATE_MOMO_ORDER_SUCCESS = "Create MoMo order successful";
+        public static final String MOMO_IPN_SUCCESS = "MoMo IPN processed successfully";
+        public static final String MOMO_CALLBACK_SUCCESS = "MoMo callback processed successfully";
+
+        public static final String COD_PAYMENT_SUCCESS = "COD payment processed successfully";
 
     }
 
+    public static class Order {
 
+        private Order() {}
 
+        public static final String GET_ORDER_SUCCESS = "Get all order successfully";
+        public static final String UPDATE_STATUS_ORDER_SUCCESS = "Update status order successfully";
+        public static final String GET_INVOICE_SUCCESS = "Get invoice success";
+
+    }
 
 }

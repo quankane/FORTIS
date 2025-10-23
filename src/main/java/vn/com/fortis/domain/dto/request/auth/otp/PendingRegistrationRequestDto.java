@@ -1,8 +1,8 @@
 package vn.com.fortis.domain.dto.request.auth.otp;
 
+import vn.com.fortis.domain.dto.request.auth.RegisterRequestDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.domain.dto.request.auth.RegisterRequestDto;
 
 import java.time.LocalDateTime;
 

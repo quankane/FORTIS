@@ -1,8 +1,8 @@
 package vn.com.fortis.domain.dto.request.auth.otp;
 
+import vn.com.fortis.domain.dto.request.auth.ForgotPasswordRequestDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.domain.dto.request.auth.ForgotPasswordRequestDto;
 
 import java.time.LocalDateTime;
 

@@ -119,13 +119,15 @@ public class ProductController {
     )
     @GetMapping(UrlConstant.Product.GET_PRODUCTS_BY_CATEGORY_ID)
     public ResponseEntity<?> getProductsByCategoryId(
-            @PathVariable Long categoryId,
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
-        PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize);
-        return ResponseUtil.success(
-                SuccessMessage.Product.GET_PRODUCT_SUCCESS,
-                productService.getProductsByCategoryId(categoryId, paginationRequest));
+                    @PathVariable Long categoryId,
+                    @RequestParam(defaultValue = "1") Integer pageNum,
+                    @RequestParam(defaultValue = "10") Integer pageSize,
+                    @RequestParam(required = false) @Schema(example = "asc or discount_asc or sold_quantity_asc or created_at_asc") String sortBy,
+                    @RequestParam(required = false) @Schema(example = "priceRange:under_1m&color:Nâu đậm&categoryId:1&keyword:a") String search) {
+            PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize);
+            return ResponseUtil.success(
+                            SuccessMessage.Product.GET_PRODUCT_SUCCESS,
+                            productService.getProductsByCategoryId(categoryId, paginationRequest, sortBy, search));
     }
 
 
@@ -138,12 +140,12 @@ public class ProductController {
     public ResponseEntity<?> filterProducts(
             @RequestParam(defaultValue = "1", required = false) Integer pageNum,
             @RequestParam(defaultValue = "10", required = false) Integer pageSize,
-            @RequestParam(required = false) @Schema(example = "asc") String sortByPrice,
+            @RequestParam(required = false) @Schema(example = "asc or discount_asc or sold_quantity_asc or created_at_asc") String sortBy,
             @RequestParam(required = false) @Schema(example = "priceRange:under_1m&color:Nâu đậm&categoryId:1&keyword:a") String search) {
-        PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize);
-        return ResponseUtil.success(
-                SuccessMessage.Product.GET_PRODUCT_SUCCESS,
-                productService.filterProducts(paginationRequest, sortByPrice, search));
+            PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize);
+            return ResponseUtil.success(
+                            SuccessMessage.Product.GET_PRODUCT_SUCCESS,
+                            productService.filterProducts(paginationRequest, sortBy, search));
     }
 
     @Tag(name = "public-product-controller", description = "Public Product APIs")
@@ -153,15 +155,15 @@ public class ProductController {
     )
     @GetMapping(UrlConstant.Product.GET_ALL_PRODUCTS)
     public ResponseEntity<?> getAllProducts(
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "productName") String sortBy,
-            @RequestParam(defaultValue = "ASC") String sortType) {
+                    @RequestParam(defaultValue = "1") Integer pageNum,
+                    @RequestParam(defaultValue = "10") Integer pageSize,
+                    @RequestParam(defaultValue = "productName") String sortBy,
+                    @RequestParam(defaultValue = "ASC") String sortType) {
 
-        PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize, sortBy, sortType);
-        return ResponseUtil.success(
-                SuccessMessage.Product.GET_PRODUCT_SUCCESS,
-                productService.getAllProducts(paginationRequest));
+            PaginationRequestDto paginationRequest = new PaginationRequestDto(pageNum, pageSize, sortBy, sortType);
+            return ResponseUtil.success(
+                            SuccessMessage.Product.GET_PRODUCT_SUCCESS,
+                            productService.getAllProducts(paginationRequest));
     }
 
 }

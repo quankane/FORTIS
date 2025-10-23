@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum MediaType {
+
     @JsonProperty("image")
     Image,
     @JsonProperty("video")

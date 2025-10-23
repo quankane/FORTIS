@@ -1,10 +1,10 @@
 package vn.com.fortis.domain.dto.request.auth.otp;
 
+import vn.com.fortis.constant.ErrorMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.constant.ErrorMessage;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +13,12 @@ import vn.com.fortis.constant.ErrorMessage;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VerifyOtpRequestDto {
 
-    @Schema(description = "Email", example = "quanducbui2017@gmail.com")
+    @Schema(description = "Email người dùng", example = "user@gmail.com")
     @NotBlank(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     String email;
 
-    @Schema(description = "OTP code")
+    @Schema(description = "Mã OTP")
     @NotBlank(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     String otp;
 }
+

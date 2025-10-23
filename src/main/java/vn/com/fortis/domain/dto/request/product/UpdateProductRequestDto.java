@@ -2,6 +2,8 @@ package vn.com.fortis.domain.dto.request.product;
 
 import vn.com.fortis.constant.ErrorMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -39,6 +41,11 @@ public class UpdateProductRequestDto {
                     """
     )
     String detailDescription;
+
+    @Schema(description = "Số lượng tồn kho mới của biến thể", example = "30")
+    @NotNull(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
+    @Min(value = 0, message = ErrorMessage.Product.ERR_QUANTITY_INVALID)
+    Integer inventoryQuantity;
 
     @Schema(description = "Tên các thể loại", example = "[\"Phòng ngủ\", \"Phòng khách\"]")
     List<String> categories;

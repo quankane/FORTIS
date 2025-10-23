@@ -1,9 +1,9 @@
 package vn.com.fortis.domain.dto.request.auth;
 
+import vn.com.fortis.constant.ErrorMessage;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.constant.ErrorMessage;
 
 @AllArgsConstructor
 @NoArgsConstructor

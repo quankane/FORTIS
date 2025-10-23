@@ -1,5 +1,6 @@
 package vn.com.fortis.config;
 
+
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 @Configuration
 @Getter
-public class VNPAYConfig {
+public class VNPayConfig {
 
     @Value("${payment.vnPay.url}")
     private String vnp_PayUrl;

@@ -1,11 +1,11 @@
 package vn.com.fortis.domain.dto.request.auth;
 
+import vn.com.fortis.constant.ErrorMessage;
+import vn.com.fortis.domain.validator.Email;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import vn.com.fortis.constant.ErrorMessage;
-import vn.com.fortis.domain.validator.Email;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +14,7 @@ import vn.com.fortis.domain.validator.Email;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ForgotPasswordRequestDto {
 
-    @Schema(description = "email", example = "quanducbui2017@gmail.com")
+    @Schema(description = "Email người dùng", example = "user@gmail.com")
     @NotBlank(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     @Email
     String email;

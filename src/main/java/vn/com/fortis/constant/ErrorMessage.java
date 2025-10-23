@@ -110,7 +110,8 @@ public class ErrorMessage {
 
     public static class Product {
 
-        private Product() {}
+        private Product() {
+        }
 
         public static final String ERR_PRICE_INVALID = "exception.product.price.invalid";
         public static final String ERR_QUANTITY_INVALID = "exception.product.quantity.invalid";
@@ -124,23 +125,67 @@ public class ErrorMessage {
 
     public static class Order {
 
-
-        private Order() {}
+        private Order() {
+        }
 
         public static final String ERR_PAYMENT_NOT_FOUND = "exception.order.not.found";
         public static final String ERR_ORDER_NOT_EXISTED = "exception.order.not.existed";
         public static final String ERR_PAYMENT_TYPE_INVALID = "exception.order.payment.type.invalid";
         public static final String ERR_PAYMENT_EXPIRED = "exception.order.payment.expired";
         public static final String ERR_PAYMENT_STATUS_INVALID = "exception.order.payment.status.invalid";
+        public static final String ERR_PAYMENT_COMPLETED = "exception.order.payment.completed";
+        public static final String ERR_ORDER_NOT_COMPLETED = "exception.order.not.completed";
+        public static final String ERR_INVALID_ORDER_STATUS = "exception.order.status.incompatible";
+        public static final String ERR_ORDER_ITEMS_EMPTY = "exception.order.items.empty";
+
     }
 
     public static class Payment {
 
-        private Payment() {}
+        private Payment() {
+        }
 
-        public static final String CALLBACK_VNPAY_FAIL = "exception.vnpay.callback.verification.failed";
+        public static final String CALLBACK_VNPAY_FAIL = "exception.vnpay.callback.fail";
+        public static final String IPN_VERIFY_FAIL = "exception.vnpay.ipn.verify.fail";
+        public static final String CREATE_VNPAY_URL_FAIL = "exception.vnpay.url.create.fail";
+        public static final String ERR_ORDER_TOTAL_AMOUNT_NOT_MATCH = "exception.order.total.amount.not.match";
+
+        public static final String CREATE_MOMO_ORDER_FAIL = "exception.momo.create.order.fail";
+        public static final String MOMO_IPN_VERIFY_FAIL = "exception.momo.ipn.verify.fail";
+        public static final String MOMO_CALLBACK_FAIL = "exception.momo.callback.fail";
+        public static final String MOMO_AMOUNT_TOO_LOW = "exception.momo.amount.too.low";
+        public static final String MOMO_AMOUNT_TOO_HIGH = "exception.momo.amount.too.high";
+        public static final String MOMO_ORDER_ALREADY_PAID = "exception.momo.order.already.paid";
+        public static final String MOMO_ORDER_CANCELLED = "exception.momo.order.cancelled";
+        public static final String MOMO_PAYMENT_PENDING = "exception.momo.payment.pending";
+        public static final String MOMO_PAYMENT_COMPLETED = "exception.momo.payment.completed";
+
+        public static final String COD_ORDER_ALREADY_COMPLETED = "exception.cod.order.already.completed";
+        public static final String COD_ORDER_CANCELLED = "exception.cod.order.cancelled";
+        public static final String COD_PAYMENT_ALREADY_COMPLETED = "exception.cod.payment.already.completed";
+        public static final String STATUS_IS_NOT_SUPPORT = "exception.status.is.not.support";
 
 
+    }
+
+    public static class Cart {
+        private Cart() {}
+
+        public static final String ERR_CART_NOT_FOUND = "exception.cart.not.found";
+        public static final String ERR_CART_QUANTITY_INVALID = "exception.cart.quantity.invalid";
+        public static final String ERR_CART_ITEM_NOT_EXISTED_IN_CART = "exception.cart.item.not.existed.in.cart";
+    }
+
+    public static class Address {
+
+        private Address() {}
+
+        public static final String ERR_COUNTRY_EMPTY = "exception.country.empty";
+        public static final String ERR_CITY_EMPTY = "exception.city.empty";
+        public static final String ERR_DISTRICT_EMPTY = "exception.district.empty";
+        public static final String ERR_COMMUNE_EMPTY = "exception.commune.empty";
+        public static final String ERR_DETAIL_ADDRESS_NULL = "exception.detail.address.null";
+        public static final String ERR_ADDRESS_NOT_FOUND = "exception.address.not.found";
     }
 
 }
